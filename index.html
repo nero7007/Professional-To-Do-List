@@ -3,90 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Login - Professional To-Do List" data-ar="تسجيل الدخول - قائمة المهام المهنية">Login - Professional To-Do List</title>
+    <title data-en="Professional To-Do List" data-ar="قائمة المهام المهنية">Professional To-Do List</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/todo.css">
     <link rel="stylesheet" href="css/notifications.css">
 
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <!-- Language and Theme Switcher -->
-            <div class="auth-header">
-                <div class="theme-language-controls">
-                    <button type="button" class="btn btn-icon" id="themeToggle" aria-label="Toggle theme">
-                        <span class="theme-icon">🌙</span>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-container">
+                <!-- Brand -->
+                <a href="#" class="navbar-brand" data-en="Professional To-Do" data-ar="المهام المهنية">Professional To-Do</a>
+                
+                <!-- Navigation Controls -->
+                <div class="navbar-nav">
+                    <button type="button" class="btn btn-primary" id="createNoteBtn" data-en="+ New Note" data-ar="+ مهمة جديدة">
+                        + New Note
                     </button>
+                    
+                    <button type="button" class="btn btn-success" id="saveNotesBtn" data-en="💾 Save" data-ar="💾 حفظ">
+                        💾 Save
+                    </button>
+                    
+                    <button type="button" class="btn btn-outline" id="setAlarmBtn" data-en="⏰ Set Alarm" data-ar="⏰ تعيين منبه">
+                        ⏰ Set Alarm
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary" id="draftsBtn" data-en="📄 Drafts" data-ar="📄 المسودات">
+                        📄 Drafts
+                    </button>
+                    
                     <button type="button" class="btn btn-outline" id="languageToggle">
                         <span data-en="عربي" data-ar="English">عربي</span>
                     </button>
-                </div>
-                
-                <h1 class="auth-title" data-en="Welcome Back" data-ar="مرحباً بعودتك">Welcome Back</h1>
-                <p class="auth-subtitle" data-en="Sign in to your account to continue" data-ar="قم بتسجيل الدخول إلى حسابك للمتابعة">Sign in to your account to continue</p>
-            </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form" novalidate>
-                <div class="form-group">
-                    <label for="loginEmail" class="form-label" data-en="Email Address" data-ar="عنوان البريد الإلكتروني">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="loginEmail" 
-                        name="email" 
-                        class="form-input" 
-                        required 
-                        autocomplete="email"
-                        data-placeholder-en="Enter your email address"
-                        data-placeholder-ar="أدخل عنوان بريدك الإلكتروني"
-                        placeholder="Enter your email address"
-                    >
-                    <span class="form-error" id="emailError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword" class="form-label" data-en="Password" data-ar="كلمة المرور">Password</label>
-                    <div class="password-input-wrapper">
-                        <input 
-                            type="password" 
-                            id="loginPassword" 
-                            name="password" 
-                            class="form-input" 
-                            required 
-                            autocomplete="current-password"
-                            data-placeholder-en="Enter your password"
-                            data-placeholder-ar="أدخل كلمة المرور"
-                            placeholder="Enter your password"
-                        >
-                        <button type="button" class="password-toggle" id="toggleLoginPassword" aria-label="Toggle password visibility">
-                            <span class="password-icon">👁️</span>
-                        </button>
-                    </div>
-                    <span class="form-error" id="passwordError"></span>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary btn-lg w-full" id="loginButton">
-                        <span class="button-text" data-en="Sign In" data-ar="تسجيل الدخول">Sign In</span>
-                        <span class="loading-spinner d-none">⏳</span>
+                    
+                    <button type="button" class="btn btn-icon" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    
+                    <button type="button" class="btn btn-danger" id="logoutBtn" data-en="🚪 Logout" data-ar="🚪 تسجيل الخروج">
+                        🚪 Logout
                     </button>
                 </div>
-            </form>
+            </div>
+        </div>
+    </nav>
 
-            <!-- Additional Links -->
-            <div class="auth-footer">
-                <div class="auth-links">
-                    <a href="reset-password.html" class="auth-link" data-en="Forgot your password?" data-ar="نسيت كلمة المرور؟">Forgot your password?</a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h1 class="welcome-title" data-en="Welcome back!" data-ar="مرحباً بعودتك!">Welcome back!</h1>
+                <p class="welcome-subtitle" data-en="Start organizing your tasks professionally" data-ar="ابدأ في تنظيم مهامك بشكل مهني">Start organizing your tasks professionally</p>
+                <div class="user-info">
+                    <span class="user-greeting" data-en="Hello," data-ar="مرحباً،">Hello,</span>
+                    <span class="user-name" id="currentUserName"></span>
                 </div>
-                
-                <div class="auth-separator">
-                    <span data-en="Don't have an account?" data-ar="ليس لديك حساب؟">Don't have an account?</span>
+            </section>
+
+            <!-- Note Creation Section -->
+            <section class="note-section">
+                <div class="note-container">
+                    <!-- Note Title Input -->
+                    <div class="note-title-section">
+                        <input 
+                            type="text" 
+                            id="noteTitle" 
+                            class="note-title-input" 
+                            data-placeholder-en="Enter note title..."
+                            data-placeholder-ar="أدخل عنوان المهمة..."
+                            placeholder="Enter note title..."
+                            maxlength="100"
+                        >
+                    </div>
+
+                    <!-- School Paper Writing Area -->
+                    <div class="paper-container">
+                        <div class="paper-lines" id="paperLines"></div>
+                        <textarea 
+                            id="noteContent" 
+                            class="note-textarea"
+                            data-placeholder-en="Start writing your notes here..."
+                            data-placeholder-ar="ابدأ في كتابة ملاحظاتك هنا..."
+                            placeholder="Start writing your notes here..."
+                            rows="15"
+                        ></textarea>
+                    </div>
+
+                    <!-- Note Actions -->
+                    <div class="note-actions">
+                        <button type="button" class="btn btn-primary" id="saveCurrentNote" data-en="💾 Save Note" data-ar="💾 حفظ المهمة">
+                            💾 Save Note
+                        </button>
+                        
+                        <button type="button" class="btn btn-outline" id="clearNote" data-en="🗑️ Clear" data-ar="🗑️ مسح">
+                            🗑️ Clear
+                        </button>
+                        
+                        <button type="button" class="btn btn-warning" id="previewNote" data-en="👁️ Preview" data-ar="👁️ معاينة">
+                            👁️ Preview
+                        </button>
+                    </div>
+
+                    <!-- Character Count -->
+                    <div class="note-info">
+                        <span class="char-count">
+                            <span data-en="Characters:" data-ar="الأحرف:">Characters:</span>
+                            <span id="charCount">0</span>
+                            <span data-en="/ Words:" data-ar="/ الكلمات:">/ Words:</span>
+                            <span id="wordCount">0</span>
+                        </span>
+                        <span class="save-status" id="saveStatus"></span>
+                    </div>
                 </div>
-                
-                <a href="register.html" class="btn btn-secondary btn-lg w-full">
-                    <span data-en="Create New Account" data-ar="إنشاء حساب جديد">Create New Account</span>
-                </a>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalNotes">0</div>
+                        <div class="stat-label" data-en="Total Notes" data-ar="إجمالي المهام">Total Notes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedNotes">0</div>
+                        <div class="stat-label" data-en="Completed" data-ar="المكتملة">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="pendingNotes">0</div>
+                        <div class="stat-label" data-en="Pending" data-ar="المعلقة">Pending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayNotes">0</div>
+                        <div class="stat-label" data-en="Today" data-ar="اليوم">Today</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Alarm Modal -->
+    <div id="alarmModal" class="modal d-none">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-en="Set Alarm" data-ar="تعيين منبه">Set Alarm</h3>
+                <button type="button" class="modal-close" onclick="closeAlarmModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="alarmTitle" class="form-label" data-en="Alarm Title" data-ar="عنوان المنبه">Alarm Title</label>
+                    <input type="text" id="alarmTitle" class="form-input" data-placeholder-en="Enter alarm title" data-placeholder-ar="أدخل عنوان المنبه" placeholder="Enter alarm title">
+                </div>
+                <div class="form-group">
+                    <label for="alarmDate" class="form-label" data-en="Date" data-ar="التاريخ">Date</label>
+                    <input type="date" id="alarmDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="alarmTime" class="form-label" data-en="Time" data-ar="الوقت">Time</label>
+                    <input type="time" id="alarmTime" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeAlarmModal()" data-en="Cancel" data-ar="إلغاء">Cancel</button>
+                <button type="button" class="btn btn-primary" id="setAlarm" data-en="Set Alarm" data-ar="تعيين المنبه">Set Alarm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal d-none">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 data-en="Note Preview" data-ar="معاينة المهمة">Note Preview</h3>
+                <button type="button" class="modal-close" onclick="closePreviewModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-content">
+                    <h4 id="previewTitle"></h4>
+                    <div id="previewText"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closePreviewModal()" data-en="Close" data-ar="إغلاق">Close</button>
+                <button type="button" class="btn btn-primary" onclick="printPreview()" data-en="Print" data-ar="طباعة">Print</button>
             </div>
         </div>
     </div>
@@ -102,7 +204,7 @@
     <script src="js/translations.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/todo.js"></script>
 <script src="js/notifications.js"></script>
 </body>
 </html>

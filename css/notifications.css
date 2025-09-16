@@ -1,0 +1,233 @@
+/* نظام الإشعارات المتسق مع تصميم المشروع */
+
+/* حاوي الإشعارات الثابت */
+.notifications-container {
+    position: fixed;
+    top: var(--spacing-xl);
+    right: var(--spacing-xl);
+    z-index: 9999;
+    max-width: 400px;
+    width: 100%;
+    pointer-events: none;
+}
+
+[dir="rtl"] .notifications-container {
+    right: auto;
+    left: var(--spacing-xl);
+}
+
+/* الإشعار الفردي */
+.notification {
+    margin-bottom: var(--spacing-md);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideInNotification 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    pointer-events: all;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+[dir="rtl"] .notification {
+    transform: translateX(-100%);
+}
+
+/* أنواع الإشعارات المختلفة */
+.notification.success {
+    background: linear-gradient(135deg, var(--success-color), var(--success-hover));
+    color: var(--color-white);
+    border-color: var(--success-color);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, var(--error-color), var(--error-hover));
+    color: var(--color-white);
+    border-color: var(--error-color);
+}
+
+.notification.warning {
+    background: linear-gradient(135deg, var(--warning-color), var(--warning-hover));
+    color: var(--color-white);
+    border-color: var(--warning-color);
+}
+
+.notification.info {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: var(--color-white);
+    border-color: var(--accent-color);
+}
+
+/* الأيقونة */
+.notification-icon {
+    font-size: var(--font-size-xl);
+    min-width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+/* محتوى الإشعار */
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 var(--spacing-xs) 0;
+    line-height: var(--line-height-tight);
+}
+
+.notification-message {
+    font-size: var(--font-size-sm);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+    opacity: 0.9;
+}
+
+/* زر الإغلاق */
+.notification-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    opacity: 0.7;
+    margin-top: -2px;
+}
+
+.notification-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+}
+
+/* شريط التقدم */
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    animation: progressBar var(--notification-duration, 5s) linear forwards;
+}
+
+/* الأنيميشن */
+@keyframes slideInNotification {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+[dir="rtl"] @keyframes slideInNotification {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutNotification {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+        max-height: 200px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+        max-height: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+[dir="rtl"] @keyframes slideOutNotification {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+/* التصميم المتجاوب */
+@media (max-width: 768px) {
+    .notifications-container {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        left: var(--spacing-md);
+        max-width: none;
+    }
+
+    [dir="rtl"] .notifications-container {
+        left: var(--spacing-md);
+    }
+
+    .notification {
+        padding: var(--spacing-md);
+    }
+
+    .notification-title {
+        font-size: var(--font-size-sm);
+    }
+
+    .notification-message {
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* النمط الداكن */
+[data-theme="dark"] .notification {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color-dark);
+}
+
+[data-theme="dark"] .notification:not(.success):not(.error):not(.warning):not(.info) {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    color: var(--text-primary);
+}

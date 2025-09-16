@@ -231,5 +231,6 @@ The application is fully responsive and optimized for mobile devices:
 
 **Built with ❤️ using vanilla HTML, CSS, and JavaScript**
 
-For support or questions, please refer to the code comments and documentation within each file.#   P r o f e s s i o n a l - T o - D o - L i s t  
+For support or questions, please refer to the code comments and documentation within each file.#   P r o f e s s i o n a l - T o - D o - L i s t 
+ 
  # Professional-To-Do-List

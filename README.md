@@ -223,6 +223,6 @@ All data is stored in the browser's `localStorage`:
 
 ---
 
-**Built with ❤️ using vanilla HTML, CSS, and JavaScript**
+**Built using vanilla HTML, CSS, and JavaScript**
 
 _For support or questions, refer to the code comments and documentation within each file._

@@ -1,59 +1,108 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول | Professional To-Do List</title>
+    <title data-en="Login - Professional To-Do List" data-ar="تسجيل الدخول - قائمة المهام المهنية">Login - Professional To-Do List</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/notifications.css">
+
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-card">
-            <h1>مرحباً بعودتك</h1>
-            <p>قم بتسجيل الدخول إلى حسابك للمتابعة</p>
-            
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" name="email" required>
+            <!-- Language and Theme Switcher -->
+            <div class="auth-header">
+                <div class="theme-language-controls">
+                    <button type="button" class="btn btn-icon" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button type="button" class="btn btn-outline" id="languageToggle">
+                        <span data-en="عربي" data-ar="English">عربي</span>
+                    </button>
                 </div>
                 
-                <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                
-                <button type="submit" class="btn-primary">تسجيل الدخول</button>
-            </form>
-
-            <!-- ✨ التنبيه الأمني الجديد -->
-            <div style="font-size: 0.9em; color: #666; margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #17a2b8;">
-                <p style="margin: 0 0 8px 0;">
-                    ⚠️ <strong>تنبيه أمني:</strong> هذا الموقع تجريبي لأغراض العرض فقط. لا يتم إرسال أي بيانات إلى خوادم خارجية، وجميع المعلومات تُخزن محليًا في متصفحك.
-                </p>
-                <p style="margin: 0;">
-                    ⚠️ <strong>Security Notice:</strong> This demo website is for showcase purposes only. No data is sent to external servers, and all information is stored locally in your browser.
-                </p>
+                <h1 class="auth-title" data-en="Welcome Back" data-ar="مرحباً بعودتك">Welcome Back</h1>
+                <p class="auth-subtitle" data-en="Sign in to your account to continue" data-ar="قم بتسجيل الدخول إلى حسابك للمتابعة">Sign in to your account to continue</p>
             </div>
 
-            <div class="auth-links">
-                <a href="register.html">إنشاء حساب جديد</a>
-                <a href="reset-password.html">نسيت كلمة المرور؟</a>
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label" data-en="Email Address" data-ar="عنوان البريد الإلكتروني">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        name="email" 
+                        class="form-input" 
+                        required 
+                        autocomplete="email"
+                        data-placeholder-en="Enter your email address"
+                        data-placeholder-ar="أدخل عنوان بريدك الإلكتروني"
+                        placeholder="Enter your email address"
+                    >
+                    <span class="form-error" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label" data-en="Password" data-ar="كلمة المرور">Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password" 
+                            class="form-input" 
+                            required 
+                            autocomplete="current-password"
+                            data-placeholder-en="Enter your password"
+                            data-placeholder-ar="أدخل كلمة المرور"
+                            placeholder="Enter your password"
+                        >
+                        <button type="button" class="password-toggle" id="toggleLoginPassword" aria-label="Toggle password visibility">
+                            <span class="password-icon">👁️</span>
+                        </button>
+                    </div>
+                    <span class="form-error" id="passwordError"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg w-full" id="loginButton">
+                        <span class="button-text" data-en="Sign In" data-ar="تسجيل الدخول">Sign In</span>
+                        <span class="loading-spinner d-none">⏳</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Additional Links -->
+            <div class="auth-footer">
+                <div class="auth-links">
+                    <a href="reset-password.html" class="auth-link" data-en="Forgot your password?" data-ar="نسيت كلمة المرور؟">Forgot your password?</a>
+                </div>
+                
+                <div class="auth-separator">
+                    <span data-en="Don't have an account?" data-ar="ليس لديك حساب؟">Don't have an account?</span>
+                </div>
+                
+                <a href="register.html" class="btn btn-secondary btn-lg w-full">
+                    <span data-en="Create New Account" data-ar="إنشاء حساب جديد">Create New Account</span>
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- رابط سياسة الخصوصية -->
-    <footer style="text-align: center; padding: 20px; margin-top: 20px;">
-        <a href="privacy.html" style="font-size: 0.8em; color: #666; text-decoration: none;">
-            سياسة الخصوصية / Privacy Policy
-        </a>
-    </footer>
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container d-none">
+        <div class="message-content">
+            <span class="message-text"></span>
+            <button type="button" class="message-close" onclick="hideMessage()">×</button>
+        </div>
+    </div>
 
     <script src="js/translations.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/login.js"></script>
+<script src="js/notifications.js"></script>
 </body>
 </html>

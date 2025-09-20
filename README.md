@@ -1,5 +1,9 @@
 # Professional Bilingual To-Do List Application
 
+https://www.loom.com/share/6f475f20320b49d3b5de22a775891f6c?sid=f8d16eb4-a229-4fef-b0ee-1273abb018ef
+
+---
+
 ![Status](https://img.shields.io/badge/status-active-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-yellow)
